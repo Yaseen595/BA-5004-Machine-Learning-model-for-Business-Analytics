@@ -50,3 +50,34 @@ def increment_counter(value):
     return counter
 
 # Pseudocode: Increase global counter by input value
+
+
+# -----------------------------------------
+# Code added by: Usama (24I-XXXX)
+# Contribution: Data inspection, missing values handling, new feature engineering
+# -----------------------------------------
+
+# To have an idea about the data set
+df.head()
+df.info()
+df.shape
+df.describe()
+
+# Checking null values
+df.isna().sum()
+
+# Fill null value with median
+df['age'].fillna(df['age'].median(), inplace=True)
+
+# Function to calculate missing value percentage per column
+def missing_percentage(df):
+    return (df.isna().sum() / len(df)) * 100
+
+# New variable to check if a person is an adult
+df['is_adult'] = df['age'].apply(lambda x: 1 if x >= 18 else 0)
+
+# Pseudocode:
+# 1. Check if dataset has duplicates
+# 2. Remove duplicates if found
+if df.duplicated().sum() > 0:
+    df.drop_duplicates(inplace=True)
